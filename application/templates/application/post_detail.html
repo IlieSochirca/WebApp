@@ -1,0 +1,53 @@
+{% extends 'application/base.html' %}
+{% load staticfiles %}
+
+{% block title %}<title>Post</title>{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class=" main col-md-9">
+                <div class="well">
+                    <div class="card">
+                        <h3>Post Comments:</h3>
+                        <h4>{{ post.description }}</h4>
+                        <ul id="post-comment" class="list-group">
+                        {% for comment in post.comment_set.all %}
+                            <li class="list-group-item">
+                                {% if not comment.added_by.profile.image %}
+                                        <img src="{% static 'images/avatar.png'  %}" class="img-responsive" width="50">
+                                {% else %}
+                                        <img src="{{ comment.added_by.profile.image.url }}" width="50">
+                                {% endif %}
+                                {{ comment.description }}
+    {#                            <img src="{{ comment.image.url }}">#}
+                                <i>( by {{ comment.added_by.username }})</i>
+                                {% if comment.added_by == user %}
+                                <form action="{% url 'application:comment-edit' post.pk comment.pk %}" style="float: right">
+                                    <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></button>
+                                </form>
+                                <form action="{% url 'application:comment-delete'  post.pk comment.pk %}" method="post" style="float: right" > {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary btn-sm">
+                                         <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </form>
+                                {% endif %}
+                                <button id="comment-likes" data-commentid="{{ comment.pk }}" class="btn btn-default btn-sm" type="button"><span class="glyphicon glyphicon-thumbs-up"></span>
+                                   <strong id="like_count_comment">{{ comment.likes}}</strong>
+                                </button>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar col-md-3">
+                <div class="well">
+                    <p><b>Group Name:</b> {{ post.group_post.name }}</p>
+                    <p><b>Post Name:</b> {{ post.name }}</p>
+                    <a href="{% url 'application:comment-add' post.pk %}" ><span class="glyphicon glyphicon-plus"></span> Add a comment</a></br>
+                    <a href="{% url 'application:group_detail' post.group_post.pk %}"><span class="glyphicon glyphicon-chevron-left"></span> Back to Group Page</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

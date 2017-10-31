@@ -1,0 +1,33 @@
+{% extends 'application/base.html' %}
+{% load staticfiles %}
+
+{% block title%}<title>My Profile</title>{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>My Profile</h2>
+                    {% if user.profile.image  %}
+                        <img src="{{ user.profile.image.url }}" class="img-responsive" width="160">
+                    {% else %}
+                         <img src="{% static 'images/avatar.png'  %}" class="img-responsive" width="160">
+                    {% endif %}
+{#                    <img src="{{ user.profile.image_or_default.url }}" class="img-responsive" width="160">#}
+                    <hr>
+                    <p>Username: {{ user }}</p>
+                    <p>First Name: {{ user.first_name }}</p>
+                    <p>Last Name: {{ user.last_name }}</p>
+                    <p>Email: {{ user.email }}</p>
+                    <p>Phone Number: {{ user.profile.phone }}</p>
+                    <p>Birthday: {{ user.profile.birth_date }}</p>
+                    <p>Hobby: {{ user.profile.hobby }}</p>
+                    <p>City:{{ user.profile.city }}</p>
+                    <p>Current Project: {{ user.profile.current_project }}</p>
+                    <a href="{% url 'application:profile-edit' %}" style="float: right"><span class="glyphicon glyphicon-edit"></span> Update My Profile</a>&nbsp;
+                    <a href="/profile/settings/password" style="float: right"><span class="glyphicon glyphicon-lock"></span> Change My Password   </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

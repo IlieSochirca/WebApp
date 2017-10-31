@@ -1,0 +1,15 @@
+{% extends 'application/base.html' %}
+{% load staticfiles %}
+{% block title %} <title>Logged Out</title>{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+            <h2>You are now Logged out</h2>
+            <h3>If you want to log in again, click on the button below</h3>
+            <a href="/"><button type="submit" class="btn btn-primary btn-small">Ok</button></a>
+            <a href="/accounts/login"><button type="submit" class="btn btn-primary btn-small">Log In Again</button></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'application/base.html' %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Home Page</title> {% endblock %}
+</head>
+{% block body %}
+    <h3 class="text-center"> Welcome <b>{{ user.username }}</b> To our Team Site
+    <p>Join any group you are interested below and enjoy your time :) </p>
+    </h3>
+    <div class="group-container container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+{#               NAV TABS #}
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active" role="presentation">
+                        <a href="#mygroups" aria-controls="home" role="tab" data-toggle="tab"> All Groups</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#favorites" aria-controls="home" role="tab" data-toggle="tab">Favorites</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#allgroups" aria-controls="home" role="tab" data-toggle="tab">My Groups</a>
+                    </li>
+                    <li role="presentation" style="float: right;">
+                        <a href="{% url 'application:group-add' %}"><span class="glyphicon glyphicon-plus"></span> &nbsp; Add Group</a>
+                    </li>
+                </ul>
+                <div class="tab-content product-description-tabs">
+                    <div role="tabpanel" class="tab-pane active" id="mygroups">
+                         <ul class="list-group">
+                            {% for group in all_groups %}
+                                <li class="list-group-item"><a href="{% url 'application:group_detail' group.pk %}">{{ group.name }}</a>
+                                    {% if group.added_by ==  user %}
+                                    <div class="btn" >
+                                        <a href="{% url 'application:group-edit'  group.pk %}" ><span class="glyphicon glyphicon-edit"></span></a>
+                                    </div>
+                                    <form action="{% url 'application:group-delete' group.pk %}" method="post" style="float: right"> {% csrf_token %}
+                                        <input type="hidden" name="group_id" value="{{ group.pk }}">
+                                        <button type="submit" class="btn btn-default btn-sm">
+                                             <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="favorites">
+                        <h2>Add here all your Favorite Groups</h2>
+                        {% for group in all_groups %}
+                            {% if group.is_favorite is True%}
+                                <li class="list-group-item"><a href="{% url 'application:group_detail' group.pk %}">{{ group.name }}</a>
+                                    <div class="btn" >
+                                        <a href="{% url 'application:group-edit'  group.pk %}" ><span class="glyphicon glyphicon-edit"></span></a>
+                                    </div>
+                                    <form action="{% url 'application:group-delete' group.pk %}" method="post" style="float: right"> {% csrf_token %}
+                                        <input type="hidden" name="group_id" value="{{ group.pk }}">
+                                        <button type="submit" class="btn btn-default btn-sm">
+                                             <span class="glyphicon glyphicon-trash"></span>
+                                        </button>
+                                    </form>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="allgroups">
+                        <h2>All Groups created ever</h2>
+                    </div>
+                </div>
+            {% include 'application/pagination.html' %}
+            </div>
+        </div>
+    </div>
+ {% endblock %}
+
+</html>

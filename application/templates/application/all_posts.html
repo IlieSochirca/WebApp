@@ -1,0 +1,22 @@
+{% extends 'application/base.html' %}
+{% block title%}<title>My Posts</title>{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class=" main col-md-9">
+                <div class="well">
+                    <h2><p>{{ post.name }}</p></h2>
+                    {% for post in group.post_set.all %}
+                    <p>{{ post.description }}</p>
+                    <p>{{ post.comment }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="sidebar col-md-3">
+                <div class="well">
+                    <button class="btn btn primary">Add a Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

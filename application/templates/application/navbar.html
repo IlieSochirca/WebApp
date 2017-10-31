@@ -1,0 +1,72 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        {% if not user.is_authenticated  %}
+            <a class="navbar-brand" href="/">Application</a>
+        {% endif %}
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+          {% if user.is_authenticated %}
+        <li><a href="/home">Home <span class="sr-only">(current)</span></a></li>
+          {% endif %}
+{#        <li><a href="#">Groups</a></li>#}
+{#        <li class="dropdown">#}
+{#          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>#}
+{#          <ul class="dropdown-menu">#}
+{#            <li><a href="#">Action</a></li>#}
+{#            <li><a href="#">Another action</a></li>#}
+{#            <li><a href="#">Something else here</a></li>#}
+{#            <li role="separator" class="divider"></li>#}
+{#            <li><a href="#">Separated link</a></li>#}
+{#            <li role="separator" class="divider"></li>#}
+{#            <li><a href="#">One more separated link</a></li>#}
+{#          </ul>#}
+{#        </li>#}
+      </ul>
+      <div class="navbar-form navbar-left">
+          {% if request.path == "/home/" %}
+            <form method="GET" action="{% url 'application:home' %}">
+                <input type="text" name="q" class="form-control" placeholder="Search Groups" value="{{ request.GET.q }}">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+          {% elif '/group/' in request.path  and '/post/' not in request.path %}
+            <form method="GET" action="{% url 'application:group_detail' group.pk  %}" >
+                <input type="text" name="p" class="form-control" placeholder="Search Posts" value="{{ request.GET.p }}">
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+          {% endif %}
+      </div>
+{#     THE RIGHT SIDE NAVIGATION MENU#}
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Notifications</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}<span class="glyphicon glyphicon-user"></span>
+
+              <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+{#          for login and logout urls we need to add accounts/ before as this is the main url pattern#}
+            {% if user.is_authenticated %}
+                <li><a href="/profile">My profile</a></li>
+                <li><a href="/accounts/logout">Log Out</a></li>
+            {% else %}
+                <li><a href="/register">Sign In</a></li>
+                <li><a href="/accounts/login">Log In</a></li>
+            {% endif %}
+
+            <li role="separator" class="divider"></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

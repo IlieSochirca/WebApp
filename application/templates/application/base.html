@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load staticfiles %}
+    <meta charset="UTF-8">
+    {% block title %} {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css'  %}">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="wrapper-content">
+            {% include 'application/navbar.html' %}
+{#        this part of the code can be overriden by child templates#}
+            {% block body %}
+            {% endblock %}
+
+        </div>
+    </div>
+
+     {% include 'application/footer.html' %}
+
+ <!-- jQuery -->
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static "/js/ajax.js" %}"></script>
+    <!--Latest Compiled Javascript for Bootstrap-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

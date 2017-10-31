@@ -1,0 +1,31 @@
+{% extends "application/base.html" %}
+{% load staticfiles %}
+{% block title %}<title>Log In</title>{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-lg-offset-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Log In</h3>
+                        <form method="post" class="form-horizontal">{% csrf_token %}
+{#                            I have to create a form template for every form from this site and include it in every template #}
+                            {{ form.as_p }}
+                                <a href="/home"><button type="submit" class="btn btn-primary btn-block">Log In</button></a>
+                        </form>
+                    </div>
+                    <div class="card-footer text-muted text-center">
+                        New to this site? <a href="/register">Sign Up</a>
+                    </div>
+                </div>
+                <div class="text-center py-2">
+                    <small>
+                        <a href="/reset">Forgot your password</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
