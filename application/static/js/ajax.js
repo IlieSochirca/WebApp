@@ -23,3 +23,35 @@ $(document).ready(function () {
         });
     });
 });
+
+
+$(document).ready(function (e) {
+    var follow_button = $("#followers-group button#followers-click");
+    var user = $('.username').data('value');
+    follow_button.click(function () {
+       var groupid = $(this).attr('data-groupid');
+       if ($("div#followers-group p").filter(":contains('"+user+"')").length==0) {
+           // console.log('bbbbb');
+           // console.log($("div#followers-group p").filter(":contains('" + user + "')"));
+           $.get('/group-follow/', {group_pk: groupid}, function (data) {
+               // console.log('ssss');
+               $("div h5 strong#group_follow_count").html(data);
+               $("#followers-group ").append('<p><a href="/userprofile/'+user+'">' + user + '</a></p>');
+               console.log(user)
+               $(follow_button).html('Unfollow');
+               console.log('add')
+               // console.log(data);
+               // console.log(user);
+           });
+       } else {
+           $.get('/group-follow/', {group_pk: groupid}, function (data) {
+                $("div h5 strong#group_follow_count").html(data);
+                // alert("Do you really want to unfollow this group?");
+                $("div p").filter(":contains('"+user+"')").remove();
+                $(follow_button).html('Follow');
+                console.log('remove')
+           })
+           }
+       });
+});
+

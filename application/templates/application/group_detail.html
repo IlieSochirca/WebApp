@@ -11,8 +11,8 @@
                     {% for post in all_posts %}
                             <li class="list-group-item">
                                 <a href="{% url 'application:post_detail' group.pk post.pk %}">{{ post.name }}</a>
-                                <p><i>Posted by {{ post.posted_by.username}}</i></p>
-                                {% if post.posted_by == user %}
+                                <p><i>Posted by <a href="#">{{ post.posted_by.username}}</a></i></p>
+{#                                {% if post.posted_by == user %}#}
                                 <form action="{% url 'application:post-edit' group.pk post.pk %}" style="float: right">
                                     <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></button>
                                 </form>
@@ -21,7 +21,7 @@
                                              <span class="glyphicon glyphicon-trash"></span>
                                         </button>
                                 </form>
-                                {% endif %}
+{#                                {% endif %}#}
                                 <button id="post-likes" data-postid="{{ post.pk }}" class="btn btn-default btn-sm" type="button"><span id="show-likes" class="glyphicon glyphicon-thumbs-up"></span>
                                    <strong id="like_count_post">{{ post.likes}}</strong>
                                 </button>
@@ -35,15 +35,36 @@
                     <p><b>Group name:</b>{{ group.name }}</p>
                     <p><b>Group Category:</b>{{ group.category }}</p>
                     <p><b>Group Description:</b> {{ group.description }}</p>
-                    <p><b>Group Created by: </b><i>{{ group.added_by}}</i></p>
+                    <p><b>Group Created by: </b><a href="{%  url 'application:users_profile' group.added_by %}"><i>{{ group.added_by}}</i></a></p>
                     <p><b>Creation date:</b>  {{ group.created }}
                         <b>Last Update:</b>  {{ group.updated }}
                     </p>
                     <a href="{% url 'application:post-add' group.pk %}"><span class="glyphicon glyphicon-plus"></span> Add a post</a></br>
-                    <a href="{% url 'application:home'  %}"><span class="glyphicon glyphicon-chevron-left"></span> Back to Home Page</a>
+                    <a href="{% url 'application:home' %}"><span class="glyphicon glyphicon-chevron-left"></span> Back to Home Page</a>
                 </div>
-                <div class="well">
-                    <h4>Group Members:</h4>
+
+
+
+
+                <div class="well username" data-value = "{{ user }}" id="followers-group">
+                    <h7>Group Followers:</h7></br>
+                    <button id="followers-click" type="button" data-groupid = "{{ group.pk }}" class="follow-button btn btn-primary" style="float:right" ><span>
+                        {% if request.user not in group.follow.all %}
+                            Follow
+                        {% else %}
+                            Unfollow
+                        {% endif %}
+                    </span></button>
+
+                    <h5 ><strong id="group_follow_count">{{ group.followers}}</strong> Followers </h5>
+                    {% if user != group.added_by %}
+                    {% for follow in group.follow.all %}
+                            <p class="user-list"><a  href= "{% url 'application:users_profile' follow %}"><i>{{follow}}</i></a></p>
+                    {% endfor %}
+
+                    {% else %}
+                        <i>You are Admin of this page!</i>
+                    {% endif %}
                 </div>
             </div>
 

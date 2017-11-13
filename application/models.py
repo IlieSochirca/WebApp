@@ -26,13 +26,6 @@ class Profile(models.Model):
             user_profile.save()
     post_save.connect(create_profile, sender=User)
 
-    # def image_or_default(self, default_path="images/avatar.png"):
-    #     if self.image:
-    #         return self.image
-    #     else:
-    #         self.image = default_path
-    #         return self.image
-
     def __str__(self):
         return "%s" %self.user
 
@@ -49,6 +42,8 @@ class Group(models.Model):
     description = models.CharField(max_length=50, blank=False, null=True, default=None)
     is_active = models.BooleanField(default=True)
     is_favorite = models.BooleanField(default=False)
+    follow = models.ManyToManyField(settings.AUTH_USER_MODEL,blank=True, related_name='follow', default=None)
+    followers = models.PositiveIntegerField(default=0)
     likes = models.PositiveIntegerField(default=0)
     created = models.DateField(auto_now_add=True, auto_now=False)
     updated = models.DateField(auto_now_add=True, auto_now=False)

@@ -1,0 +1,31 @@
+{% extends 'application/base.html' %}
+
+{% load staticfiles %}
+
+{% block title%}<title>User Profile Page</title>{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h2>{{userprofile}}'s Profile</h2>
+                    {% if userprofile.profile.image  %}
+                        <img src="{{ userprofile.profile.image.url }}" class="img-responsive" width="160">
+                    {% else %}
+                         <img src="{% static 'images/avatar.png'  %}" class="img-responsive" width="160">
+                    {% endif %}
+                    <hr>
+                    <p>Username: {{ userprofile }}</p>
+                    <p>First Name: {{ userprofile.first_name }}</p>
+                    <p>Last Name: {{ userprofile.last_name }}</p>
+                    <p>Email: {{ userprofile.email }}</p>
+                    <p>Phone Number: {{ userprofile.profile.phone }}</p>
+                    <p>Birthday: {{ userprofile.profile.birth_date }}</p>
+                    <p>Hobby: {{ userprofile.profile.hobby }}</p>
+                    <p>City:{{ userprofile.profile.city }}</p>
+                    <p>Current Project: {{ userprofile.profile.current_project }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

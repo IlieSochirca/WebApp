@@ -37,12 +37,12 @@
           {% if request.path == "/home/" %}
             <form method="GET" action="{% url 'application:home' %}">
                 <input type="text" name="q" class="form-control" placeholder="Search Groups" value="{{ request.GET.q }}">
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Search</button>
             </form>
-          {% elif '/group/' in request.path  and '/post/' not in request.path %}
-            <form method="GET" action="{% url 'application:group_detail' group.pk  %}" >
+          {% elif '/group/' in request.path  and '/post/' not in request.path and '/add/' not in request.path %}
+            <form method="GET" action="{% url 'application:group_detail' group.pk %}" >
                 <input type="text" name="p" class="form-control" placeholder="Search Posts" value="{{ request.GET.p }}">
-                <button type="submit" class="btn btn-default">Submit</button>
+                <button type="submit" class="btn btn-default">Search</button>
             </form>
           {% endif %}
       </div>
@@ -56,7 +56,7 @@
           <ul class="dropdown-menu">
 {#          for login and logout urls we need to add accounts/ before as this is the main url pattern#}
             {% if user.is_authenticated %}
-                <li><a href="/profile">My profile</a></li>
+                <li><a href="{% url 'application:profile' user.username %}">My profile</a></li>
                 <li><a href="/accounts/logout">Log Out</a></li>
             {% else %}
                 <li><a href="/register">Sign In</a></li>

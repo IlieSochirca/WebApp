@@ -11,7 +11,7 @@
                         {#                      ATTENTION: don't forget to mention action inside our form#}
                         <form action="{% url 'application:register' %}" method="post" class="form-horizontal">{% csrf_token %}
                         {{ form.as_p }}
-                            <a href="#"><button type="submit" class="btn btn-primary btn-block"> Sign In</button></a>
+                            <a href="/accounts/login"><button type="submit" class="btn btn-primary btn-block"> Sign In</button></a>
                         </form>
                         <div class="card-footer text-muted text-center">
                       Already have an account? <a href="/accounts/login">Log In</a>

@@ -70,7 +70,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'AppWeb.wsgi.application'
-
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -123,7 +123,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 LOGIN_REDIRECT_URL = '/home'
-
 # we are configuring here how we'll receive emails after reset password process
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -1,12 +1,17 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.template import RequestContext
 from django.views import generic
 from django.shortcuts import render, render_to_response, redirect, HttpResponse, get_object_or_404
-from django.http import HttpResponseForbidden, HttpResponseRedirect, request
+from django.http import HttpResponseForbidden, HttpResponseRedirect, request, Http404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import datetime, operator
 from django.db.models import Q
+
+from application.mixins import UserAuthorMixinPost, UserAuthorMixin
 from .forms import *
 from django.forms.models import inlineformset_factory
 from django.core.exceptions import PermissionDenied
@@ -15,6 +20,7 @@ from django.core.urlresolvers import reverse_lazy
 from .models import *
 from .models import Comment, Group, Post
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.core.paginator import Paginator
 
 # Create your views here.
@@ -23,8 +29,14 @@ def start_page(request):
     now = datetime.datetime.now()
     return render(request,'application/startpage.html', locals())
 
-def view_profile(request):
-    return render(request, 'registration/profile.html')
+class ProfileView(LoginRequiredMixin, View):
+    def get(self, request, username):
+        userprofile = User.objects.get(username=username)
+        return render(request, 'registration/profile.html', locals())
+
+def get_user_profile(request,username):
+    userprofile = get_object_or_404(User, username=username)
+    return render(request, 'registration/user_profile.html', locals())
 
 # REGISTRATION VIEW BASED CLASSES
 
@@ -64,8 +76,7 @@ def edit_profile(request):
                 if formset.is_valid():
                     created_user.save()
                     formset.save()
-                    return HttpResponseRedirect('/profile/')
-
+                    return render(request, 'registration/profile.html')
         return render(request, "registration/profile-edit.html", {
             "noodle": pk,
             "noodle_form": user_form,
@@ -90,16 +101,10 @@ class HomeView(generic.ListView):
             query_list = query.split()
             from functools import reduce
             result = result.filter(
-                # reduce(operator.and_,
-                #        (Q(category__icontains=q)for q in query_list))|
                 reduce(operator.and_,
                        (Q(name__icontains=q) for q in query_list))
             )
         return result
-
-# class GroupDetailView(generic.DetailView):
-#     model= Group
-#     template_name = 'application/group_detail.html'
 
 #  USING LISTVIEW CLASS INSTEAD OF DETAILVIEW IN ORDER TO MAKE THE PAGINATION
 
@@ -112,7 +117,6 @@ class PostGroupDetailView(generic.ListView):
     def get_queryset(self):
         self.group = get_object_or_404(Group, pk = self.kwargs.get('pk'))
         queryset = self.group.post_set.order_by('-created')
-        # result = super(PostGroupDetailView, self).get_queryset().filter(pk=self.kwargs.get('pk'))
 
         query_list = self.request.GET.get("p")
         if query_list:
@@ -161,28 +165,72 @@ class PostGroupDetailView(generic.ListView):
 #             )
 #         return result
 
-class GroupCreate(CreateView):
+class GroupCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Group
     fields = ['name', 'category', 'description', 'is_favorite']
+    # template_name ='application/group_form.html'
+
 
     def form_valid(self, form):
         instance = form.save(commit=False)
         instance.added_by = self.request.user
         instance.save()
-        return HttpResponseRedirect(self.get_success_url())
+        messages.success(self.request, "Group Successfully Created!")
+        return super(GroupCreate, self).form_valid(form)
+        # return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('application:home')
 
-class GroupUpdate(UpdateView):
+    # success_message = "Group was successfully created!"
+
+class GroupUpdate(SuccessMessageMixin,UserAuthorMixin, UpdateView):
     model = Group
     fields = ['name', 'category', 'description', 'is_favorite']
-    success_url = reverse_lazy('application:home')
+    success_message = "Group was Updated with success!"
 
-class GroupDelete(DeleteView):
+    def form_valid(self, form):
+        self.success_url = reverse_lazy('application:home')
+        return super(GroupUpdate, self).form_valid(form)
+
+
+
+class GroupDelete(UserAuthorMixin, DeleteView):
     model = Group
     success_url = reverse_lazy('application:home')  # this is the path where the user will be redirected after he delete a group
 
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, "Group was deleted!")
+        return super(GroupDelete, self).delete(request, *args, **kwargs)
+
+def GroupFollow(request):
+    user = request.user
+    group_id= None
+    if request.method =="GET":
+        group_id= request.GET["group_pk"]
+    followers = 0
+    if group_id:
+        group = Group.objects.get(id = int(group_id))
+        print(group,group_id,user)
+        # follow_users = group.follow.all()
+        # print(follow_users)
+        if group:
+            if user in group.follow.all():
+                group.follow.remove(user)
+                followers = group.followers - 1
+                print('scade')
+                print(followers)
+            else:
+                group.follow.add(user)
+                followers = group.followers + 1
+                print('adauga')
+                print(followers)
+            follower_users = group.follow.all()
+            print(follower_users)
+        group.followers=followers
+        group.save()
+        print(followers)
+    return HttpResponse(followers)
 
 class PostDetail(generic.DetailView):
     model = Post
@@ -215,7 +263,7 @@ def PostLike(request):
     return HttpResponse(likes)
 
 
-class PostCreate(CreateView):
+class PostCreate(SuccessMessageMixin, CreateView):
     model = Post
     fields = ['name','group_post', 'description', 'image']
 
@@ -223,29 +271,42 @@ class PostCreate(CreateView):
         instance = form.save(commit=False)
         instance.posted_by = self.request.user
         instance.save()
-        return HttpResponseRedirect(self.get_success_url())
+        messages.success(self.request, "You successfully added a new Post!")
+        return super(PostCreate, self).form_valid(form)
+        # return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('application:group_detail', kwargs={"pk": self.kwargs.get('group_pk', None)})
 
-class PostUpdate(UpdateView):
+    # success_message = "Post Successfully Created!"
+
+class PostUpdate(SuccessMessageMixin, UserAuthorMixinPost, UpdateView):
     model = Post
     fields = ['name','group_post', 'description']
+    success_message = "Post was updated!"
+
+    def form_valid(self, form):
+        return super(PostUpdate, self).form_valid(form)
 
     def get_success_url(self): # this is done to redirect the user for the last page where he came from, keep attention to mention the id, ok of the page element
         return reverse('application:group_detail', kwargs={"pk": self.kwargs.get('group_pk', None)})
 
-class PostDelete(DeleteView):
+class PostDelete(SuccessMessageMixin, UserAuthorMixinPost, DeleteView):
     model = Post
 
     def get_success_url(self):
         return reverse('application:group_detail', kwargs={"pk": self.kwargs.get('group_pk', None)})
+
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, "Post Was Deleted!")
+        return super(PostDelete, self).delete(request, *args, **kwargs)
+
 
 class CommentView(ListView):
     model = Comment
 
 
-class CommentCreate(CreateView):
+class CommentCreate(SuccessMessageMixin, CreateView):
     model= Comment
     fields = ['description', 'comment_post', 'is_active', 'is_favorite', 'image']
 
@@ -253,12 +314,16 @@ class CommentCreate(CreateView):
         instance = form.save(commit=False)
         instance.added_by = self.request.user
         instance.save()
-        return HttpResponseRedirect(instance.get_absolute_url())
+        messages.success(self.request, "You added a comment!")
+        return super(CommentCreate, self).form_valid(form)
+        # return HttpResponseRedirect(instance.get_absolute_url())
 
-class CommentUpdate(UpdateView):
+class CommentUpdate(SuccessMessageMixin, UserAuthorMixin, UpdateView):
     model = Comment
     fields = ['description', 'comment_post', 'is_active', 'is_favorite', 'image']
-
+    success_message = "Comment was updated!"
+    def form_valid(self, form):
+        return super(CommentUpdate, self).form_valid(form)
 
 @login_required
 def CommentLike(request):
@@ -282,10 +347,13 @@ def CommentLike(request):
         comment.save()
     return HttpResponse(likes)
 
-class CommentDelete(DeleteView):
+class CommentDelete(SuccessMessageMixin, UserAuthorMixin, DeleteView):
     model = Comment
 
     def get_success_url(self):
         group=self.object.comment_post.group_post.pk
         return reverse('application:post_detail', kwargs={"group_pk":group, "pk" : self.kwargs.get('post_pk'),})
 
+    def delete(self, request, *args, **kwargs):
+        messages.success(request, "You deleted the comment:(")
+        return super(CommentDelete, self).delete(request, *args, **kwargs)

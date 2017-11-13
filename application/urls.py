@@ -12,7 +12,9 @@ urlpatterns = [
     url(r'^$', views.start_page, name="startapp"),
     url(r'^home/', login_required(views.HomeView.as_view()), name="home"),
     # url(r'^search/$', views.HomeView.as_view(), name='group_search_list_view'),
-    url(r'^profile/$', views.view_profile, name="profile"),
+    # url(r'^group/posts/', views.PostList.as_view(), name='post_list'),
+    url(r'^profile/(?P<username>[\w\-]+)$', views.ProfileView.as_view(), name="profile"),
+    url(r'^userprofile/(?P<username>[a-zA-Z0-9]+)$', views.get_user_profile, name="users_profile"),
     url(r'^profile/edit/$', views.edit_profile, name="profile-edit"),
     url(r'^register/', views.RegitrationView.as_view(), name="register"),
 
@@ -43,7 +45,7 @@ url(r'^reset/$',
 
     #The rest of the URLS for Groups and Posts Pages
     url(r'^group/(?P<pk>[0-9]+)/$', login_required(views.PostGroupDetailView.as_view()), name="group_detail"),
-    # url(r'^searching/post/$', views.PostGroupDetailView.as_view(), name='post_search_list_view'),
+    url(r'^searching/post/$', views.PostGroupDetailView.as_view(), name='post_search_list_view'),
     url(r'^group/add/$', views.GroupCreate.as_view(), name="group-add"),
     url(r'^group/(?P<pk>[0-9]+)/edit/$', views.GroupUpdate.as_view(), name="group-edit"),  # this way we tell django to capture the value of regex into an argument name pk
     url(r'^group/(?P<pk>[0-9]+)/delete/$', views.GroupDelete.as_view(), name="group-delete"),
@@ -53,12 +55,11 @@ url(r'^reset/$',
     url(r'^group/(?P<group_pk>[0-9]+)/post/(?P<pk>[0-9]+)/delete/$', views.PostDelete.as_view(), name="post-delete"),
     url(r'^posts/(?P<post_pk>[0-9]+)/comments/all/$', views.CommentView.as_view(), name="comment-view"),
     url(r'^posts/(?P<post_pk>[0-9]+)/comment/add/$', views.CommentCreate.as_view(), name="comment-add"),
-    url(r'^posts/(?P<post_pk>[0-9]+)/comment/(?P<pk>[0-9]+)/edit/$', views.CommentUpdate.as_view(), name="comment-edit"),
+    url(r'^posts/(?P<post_pk>[0-9]+)/comment/(?P<pk>[0-9]+)/edit/$', views.CommentUpdate.as_view(), name="comment-edit"),   # [0-9] can be replaced with '\d' shortcut meaning all existing digits
     url(r'^posts/(?P<post_pk>[0-9]+)/comment/(?P<pk>[0-9]+)/delete/$', views.CommentDelete.as_view(), name="comment-delete"),
     url(r'^post-like/', views.PostLike, name="post-like"),
     url(r'^comment-like/', views.CommentLike, name="comment-like"),
-
-
+    url(r'^group-follow/', views.GroupFollow, name="group-follow"),
 
 ]
 
