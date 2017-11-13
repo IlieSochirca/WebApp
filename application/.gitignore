@@ -1,11 +1,10 @@
-# SQLite database files
 
-*.sqlite3
 
 .DS_Store
 bin/
 include/
 pip-selfcheck.json
+db.sqlite3
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
