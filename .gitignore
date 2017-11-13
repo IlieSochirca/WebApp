@@ -1,4 +1,5 @@
 AppWeb/settings/local.py
+AppWeb/settings/local2.py
 .py[cod]
 .DS_Store
 bin/
