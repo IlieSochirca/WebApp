@@ -25,7 +25,7 @@ SECRET_KEY = 'f@0r6f#&foj*dml(3+nnv89ek0s5yq5$e208rb-!m*=m4zk+1^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['ilies-project.herokuapp.com' ]
+ALLOWED_HOSTS = ['ilies-project.herokuapp.com']
 
 
 # Application definition
