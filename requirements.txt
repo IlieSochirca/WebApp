@@ -1,8 +1,10 @@
+
 bs4==0.0.1
 certifi==2017.11.5
 chardet==3.0.4
 ddt==1.1.1
 Django==1.11.5
+dj-database-url==0.4.2
 django-ajax-favorite==1.0.0.dev1
 django-favorite==0.0.1
 flake8==3.5.0

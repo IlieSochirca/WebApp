@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bf5b9a2e-b8a9-4bb3-9ebd-33769c22be6b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -54,7 +55,7 @@
         <entry file="file://$PROJECT_DIR$/AppWeb/urls.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="500">
-              <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -64,7 +65,7 @@
         <entry file="file://$PROJECT_DIR$/AppWeb/settings/__init__.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
-              <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -76,7 +77,7 @@
         <entry file="file://$PROJECT_DIR$/AppWeb/settings/base.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="544">
-              <caret line="32" column="18" lean-forward="true" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+              <caret line="32" column="18" lean-forward="false" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -85,8 +86,8 @@
       <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="238">
+              <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -95,8 +96,8 @@
       <file leaf-file-name="production.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AppWeb/settings/production.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="64" lean-forward="false" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="64" />
+            <state relative-caret-position="595">
+              <caret line="89" column="69" lean-forward="false" selection-start-line="89" selection-start-column="69" selection-end-line="89" selection-end-column="69" />
               <folding />
             </state>
           </provider>
@@ -106,7 +107,7 @@
         <entry file="file://$PROJECT_DIR$/AppWeb/settings/local.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1707">
-              <caret line="128" column="0" lean-forward="true" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+              <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -126,7 +127,7 @@
         <entry file="file://$PROJECT_DIR$/AppWeb/wsgi.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -342,22 +343,22 @@
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/Users/isochirca/AppData/Local/Programs/Python/AppWeb/application/urls.py" />
     <property name="jsx.switch.disabled" value="true" />
     <property name="last_opened_file_path" value="P:/" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\application\static\images" />
-      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb" />
-      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\application\media" />
-      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\media" />
-      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\application" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\media\media" />
       <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\application\media\media\images" />
       <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\media\media\images" />
       <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\tests" />
       <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\application\static\js" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\application\static\images" />
+      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb" />
+      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\application\media" />
+      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\media" />
+      <recent name="C:\Users\isochirca\AppData\Local\Programs\Python\AppWeb\application" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -865,7 +866,7 @@
     <entry file="file://$PROJECT_DIR$/AppWeb/settings/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -875,7 +876,7 @@
     <entry file="file://$PROJECT_DIR$/AppWeb/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="500">
-          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -883,7 +884,7 @@
     <entry file="file://$PROJECT_DIR$/AppWeb/settings/local.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1707">
-          <caret line="128" column="0" lean-forward="true" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <caret line="128" column="0" lean-forward="false" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -899,15 +900,15 @@
     <entry file="file://$PROJECT_DIR$/AppWeb/wsgi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AppWeb/settings/production.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="64" lean-forward="false" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="64" />
+        <state relative-caret-position="595">
+          <caret line="89" column="69" lean-forward="false" selection-start-line="89" selection-start-column="69" selection-end-line="89" selection-end-column="69" />
           <folding />
         </state>
       </provider>
@@ -915,15 +916,15 @@
     <entry file="file://$PROJECT_DIR$/AppWeb/settings/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
-          <caret line="32" column="18" lean-forward="true" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+          <caret line="32" column="18" lean-forward="false" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="238">
+          <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
           <folding />
         </state>
       </provider>
