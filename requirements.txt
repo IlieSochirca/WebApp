@@ -19,15 +19,12 @@ pipenv==8.3.2
 psutil==5.3.1
 psycopg2==2.7.1
 pycodestyle==2.3.1
-pyenchant==1.6.8
 pyflakes==1.6.0
 PyQt5==5.9
 pytz==2017.2
 Qt.py==1.0.0
 requests==2.18.4
-selenium==3.4.3
 sip==4.19.3
 urllib3==1.22
 virtualenv==15.1.0
 virtualenv-clone==0.2.6
-xlrd==1.0.0
