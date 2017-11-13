@@ -8,6 +8,7 @@ dj-database-url==0.4.2
 django-ajax-favorite==1.0.0.dev1
 django-favorite==0.0.1
 flake8==3.5.0
+gunicorn==19.7.1
 idna==2.6
 mccabe==0.6.1
 olefile==0.44
