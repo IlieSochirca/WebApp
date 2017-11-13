@@ -1,7 +1,10 @@
 AppWeb/settings/local.py
 AppWeb/settings/local2.py
+db.sqlite3
+
 .py[cod]
 .DS_Store
+
 bin/
 include/
 pip-selfcheck.json
