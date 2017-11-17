@@ -11,7 +11,7 @@ class UserForm(forms.ModelForm):
 
 class RegisterUserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)  # these 2 lines mean that I want to add these 2 fields more to this form
-    password2 = forms.CharField(widget=forms.PasswordInput)
+    repet_password = forms.CharField(widget=forms.PasswordInput)
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'username']  # these fields are those we want to take from User Model
@@ -30,10 +30,10 @@ class RegisterUserForm(forms.ModelForm):
     def clean_password2(self):
         cd = self.cleaned_data
 
-        if cd['password']!=cd['password2']:
+        if cd['password']!=cd['repet_password']:
             raise ValidationError ("Passwords don't match!")
         else:
-            return cd['password2']
+            return cd['repet_password']
 
 class UpdateForm(forms.ModelForm):
     image=forms.ImageField()
