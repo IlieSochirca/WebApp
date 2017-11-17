@@ -8,7 +8,7 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h2>{{userprofile}}'s Profile</h2>
+                    <h2>{{userprofile.first_name}}'s Profile</h2>
                     {% if userprofile.profile.image  %}
                         <img src="{{ userprofile.profile.image.url }}" class="img-responsive" width="160">
                     {% else %}
