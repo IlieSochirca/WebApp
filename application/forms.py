@@ -3,7 +3,8 @@ from .models import Profile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
 from django.core.exceptions import ValidationError
-
+from dal import autocomplete
+from .models import *
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
@@ -47,4 +48,11 @@ class UpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email', 'phone', 'birth_date', 'hobby', 'city','current_project', 'image']
+
+#
+class GroupForm(forms.ModelForm):
+    # category = forms.ModelChoiceField(queryset=GroupCategory.objects.all().order_by('name'))
+    class Meta:
+        model = Group
+        fields = ('name', 'description', 'category', 'is_favorite')
 

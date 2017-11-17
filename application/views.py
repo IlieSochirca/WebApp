@@ -1,3 +1,5 @@
+from random import randint
+
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.template import RequestContext
@@ -10,6 +12,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import datetime, operator
 from django.db.models import Q
+from dal import autocomplete
+from django.views.generic.edit import ModelFormMixin
 
 from application.mixins import UserAuthorMixinPost, UserAuthorMixin
 from .forms import *
@@ -164,28 +168,49 @@ class PostGroupDetailView(generic.ListView):
 #                        (Q(name__icontains=q)for q in query_list))
 #             )
 #         return result
+# class GroupCategoryAutoComplete(autocomplete.Select2QuerySetView):
+#     def get_queryset(self):
+#         if not self.request.user.is_authenticated():
+#             return GroupCategory.objects.none()
+#         qs = GroupCategory.objects.all()
+#
+#         if self.q:
+#             qs = qs.filter(title__istartswith=self.q)
+#         return qs
+
+class GroupCategoryAdd(LoginRequiredMixin, CreateView):
+    model = GroupCategory
+    fields = ['name']
+    template_name = 'application/group_category_form.html'
+
+    def get_success_url(self):
+        return reverse('application:group-add')
 
 class GroupCreate(SuccessMessageMixin, LoginRequiredMixin, CreateView):
     model = Group
-    fields = ['name', 'category', 'description', 'is_favorite']
-    # template_name ='application/group_form.html'
-
+    form_class = GroupForm
+    template_name ='application/group_add_form.html'
+    # fields = ['name', 'description', 'category', 'is_favorite']
 
     def form_valid(self, form):
+        print("valid function")
         instance = form.save(commit=False)
         instance.added_by = self.request.user
         instance.save()
         messages.success(self.request, "Group Successfully Created!")
-        return super(GroupCreate, self).form_valid(form)
-        # return HttpResponseRedirect(self.get_success_url())
+        super(GroupCreate, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        print('invalid form')
+        return HttpResponse("INVALID FORM")
 
     def get_success_url(self):
         return reverse('application:home')
 
-    # success_message = "Group was successfully created!"
-
 class GroupUpdate(SuccessMessageMixin,UserAuthorMixin, UpdateView):
     model = Group
+    template_name ='application/group_add_form.html'
     fields = ['name', 'category', 'description', 'is_favorite']
     success_message = "Group was Updated with success!"
 
@@ -277,8 +302,6 @@ class PostCreate(SuccessMessageMixin, CreateView):
 
     def get_success_url(self):
         return reverse('application:group_detail', kwargs={"pk": self.kwargs.get('group_pk', None)})
-
-    # success_message = "Post Successfully Created!"
 
 class PostUpdate(SuccessMessageMixin, UserAuthorMixinPost, UpdateView):
     model = Post

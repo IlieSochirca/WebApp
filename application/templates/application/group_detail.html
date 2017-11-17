@@ -12,7 +12,6 @@
                             <li class="list-group-item">
                                 <a href="{% url 'application:post_detail' group.pk post.pk %}">{{ post.name }}</a>
                                 <p><i>Posted by <a href="#">{{ post.posted_by.username}}</a></i></p>
-{#                                {% if post.posted_by == user %}#}
                                 <form action="{% url 'application:post-edit' group.pk post.pk %}" style="float: right">
                                     <button type="submit" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-edit"></span></button>
                                 </form>
@@ -21,7 +20,6 @@
                                              <span class="glyphicon glyphicon-trash"></span>
                                         </button>
                                 </form>
-{#                                {% endif %}#}
                                 <button id="post-likes" data-postid="{{ post.pk }}" class="btn btn-default btn-sm" type="button"><span id="show-likes" class="glyphicon glyphicon-thumbs-up"></span>
                                    <strong id="like_count_post">{{ post.likes}}</strong>
                                 </button>

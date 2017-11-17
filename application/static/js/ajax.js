@@ -55,3 +55,9 @@ $(document).ready(function (e) {
        });
 });
 
+$(document).ready(function () {
+    $('#add_id_category').click(function (data) {
+        $('#select_list').autocomplete()
+    })
+
+})

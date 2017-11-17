@@ -1,0 +1,67 @@
+{% extends 'application/base.html' %}
+{% block title %}<title>Add A New Group</title>{% endblock %}4
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                {% if '/add/' in request.path %}
+                    <h3 class="text-center">Add a New Group:</h3>
+                {% elif '/edit/' in request.path %}
+                    <h3 class="text-center">Edit Group:</h3>
+                {% endif %}
+                <div class="panel-body">
+                    {{ form.non_field.errors }}
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10"><span class="text-danger small"></span></div>
+                                <label class="control-label col-sm-2"><label for="id_name">Name:</label></label>
+                                {{ form.name.errors }}
+                                <div class="col-sm-10">
+                                     {{ form.name }}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10"><span class="text-danger small"></span></div>
+                                <label class="control-label col-sm-2"><label for="id_description">Description:</label></label>
+                                {{ form.description.errors }}
+                                <div class="col-sm-10">
+                                    {{ form.description }}
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                    <div class="col-sm-offset-2 col-sm-10"><span class="text-danger small"></span></div>
+                                    <label class="control-label col-sm-2"><label class="required" for="id_category">Category:</label></label>
+                                    {{ form.category.errors }}
+                                    <div class="col-sm-10">
+                                        {{ form.category }}
+                                    <a href="{%  url 'application:group_category_add' %}" class="related-widget-wrapper-link add-related" ><img src="/static/admin/img/icon-addlink.svg" alt="Add"></a>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10"><span class="text-danger small"></span></div>
+                                <label class="control-label col-sm-2"><label for="id_is_favorite">Is favorite:</label></label>
+                                {{ form.is_favorite.errors }}
+                                <div class="col-sm-10">
+                                    {{ form.is_favorite }}
+                                </div>
+                            </div>
+                            <div class="col-md-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-submit">Submit</button>
+                            </div>
+                    </form>
+{#                    <form class="form-horizontal" action="" method="post">{% csrf_token %}#}
+{#                        <div class="form-group">#}
+{#                            {% include 'application/form-template.html' %}#}
+{#                        </div>#}
+{#                        <div class="col-md-offset-2 col-sm-10">#}
+{#                            <button type="submit" class="btn btn-submit">Submit</button>#}
+{#                        </div>#}
+{#                    </form>#}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{#{{ form.media }}#}
+{% endblock %}

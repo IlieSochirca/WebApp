@@ -55,6 +55,7 @@ class Group(models.Model):
 
     def __str__(self):
         return "%s" %self.name
+
     class Meta:
         ordering = ["-created"]
 

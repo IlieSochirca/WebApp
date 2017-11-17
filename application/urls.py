@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required, permission_required
 from django.conf import settings
 from django.conf.urls.static import static
 from application import views
+# from application.views import GroupCategoryAutoComplete
 
 app_name='application'
 
@@ -47,6 +48,8 @@ url(r'^reset/$',
     url(r'^group/(?P<pk>[0-9]+)/$', login_required(views.PostGroupDetailView.as_view()), name="group_detail"),
     url(r'^searching/post/$', views.PostGroupDetailView.as_view(), name='post_search_list_view'),
     url(r'^group/add/$', views.GroupCreate.as_view(), name="group-add"),
+    url(r'^group_category/add', views.GroupCategoryAdd.as_view(), name='group_category_add'),
+    # url(r'^groupcategory-autocomplete/$', GroupCategoryAutoComplete.as_view(create_field='name'), name='groupcategory-autocomplete'),
     url(r'^group/(?P<pk>[0-9]+)/edit/$', views.GroupUpdate.as_view(), name="group-edit"),  # this way we tell django to capture the value of regex into an argument name pk
     url(r'^group/(?P<pk>[0-9]+)/delete/$', views.GroupDelete.as_view(), name="group-delete"),
     url(r'^group/(?P<group_pk>[0-9]+)/post/(?P<pk>[0-9]+)/$', login_required(views.PostDetail.as_view()), name="post_detail"),
