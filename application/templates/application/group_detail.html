@@ -33,7 +33,7 @@
                     <p><b>Group name:</b>{{ group.name }}</p>
                     <p><b>Group Category:</b>{{ group.category }}</p>
                     <p><b>Group Description:</b> {{ group.description }}</p>
-                    <p><b>Group Created by: </b><a href="{%  url 'application:users_profile' group.added_by %}"><i>{{ group.added_by}}</i></a></p>
+                    <p><b>Group Created by: </b><a href="{%  url 'application:users_profile' group.added_by.username %}"><i>{{ group.added_by}}</i></a></p>
                     <p><b>Creation date:</b>  {{ group.created }}
                         <b>Last Update:</b>  {{ group.updated }}
                     </p>
@@ -44,7 +44,7 @@
 
 
 
-                <div class="well username" data-value = "{{ user }}" id="followers-group">
+                <div class="well " data-value = "{{ user }}" id="followers-group">
                     <h7>Group Followers:</h7></br>
                     <button id="followers-click" type="button" data-groupid = "{{ group.pk }}" class="follow-button btn btn-primary" style="float:right" ><span>
                         {% if request.user not in group.follow.all %}
