@@ -15,7 +15,7 @@ urlpatterns = [
     # url(r'^search/$', views.HomeView.as_view(), name='group_search_list_view'),
     # url(r'^group/posts/', views.PostList.as_view(), name='post_list'),
     url(r'^profile/(?P<username>[\w\-]+)$', views.ProfileView.as_view(), name="profile"),
-    url(r'^userprofile/(?P<username>[a-zA-Z0-9]+)$', views.get_user_profile, name="users_profile"),
+    url(r'^userprofile/(?P<username>[\w\-]+)$', views.get_user_profile, name="users_profile"),
     url(r'^profile/edit/$', views.edit_profile, name="profile-edit"),
     url(r'^register/', views.RegitrationView.as_view(), name="register"),
 

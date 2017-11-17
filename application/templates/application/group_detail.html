@@ -57,7 +57,7 @@
                     <h5 ><strong id="group_follow_count">{{ group.followers}}</strong> Followers </h5>
                     {% if user != group.added_by %}
                     {% for follow in group.follow.all %}
-                            <p class="user-list"><a  href= "{% url 'application:users_profile' follow %}"><i>{{follow}}</i></a></p>
+                            <p class="user-list"><a  href= "{% url 'application:users_profile' follow.username %}"><i>{{follow}}</i></a></p>
                     {% endfor %}
 
                     {% else %}
