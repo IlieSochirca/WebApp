@@ -12,7 +12,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 import datetime, operator
 from django.db.models import Q
-from dal import autocomplete
 from django.views.generic.edit import ModelFormMixin
 
 from application.mixins import UserAuthorMixinPost, UserAuthorMixin

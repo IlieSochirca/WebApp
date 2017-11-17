@@ -31,8 +31,6 @@ ALLOWED_HOSTS = ['ilies-project.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'dal',
-    'dal_select2',
     'application',
     'django.contrib.auth',
     'django.contrib.admin',
