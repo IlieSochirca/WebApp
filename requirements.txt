@@ -25,6 +25,6 @@ pytz==2017.2
 Qt.py==1.0.0
 requests==2.18.4
 sip==4.19.3
-urllib3==1.22
+urllib3==1.26.5
 virtualenv==15.1.0
 virtualenv-clone==0.2.6
