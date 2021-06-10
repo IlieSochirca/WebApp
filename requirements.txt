@@ -5,7 +5,7 @@ chardet==3.0.4
 ddt==1.1.1
 dj-config-url==0.1.1
 dj-database-url==0.4.2
-Django==1.11.5
+Django==2.2.24
 django-ajax-favorite==1.0.0.dev1
 django-favorite==0.0.1
 flake8==3.5.0
